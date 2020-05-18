@@ -32,16 +32,19 @@ col_names <- grep("mean|std", features[,2], value = TRUE)
 col_names <- gsub("[()-]", "", col_names) 
 
 
-#Selecting the mean and sd columns in the complete data set
+#Filter the complete data set by mean and sd values 
 complete_data <- complete_data[col_nums]
 
 #Uses descriptive activity names to name the activities in the data set
 complete_labels <- activity_labels[match(complete_labels[,1],activity_labels[,1]),2]
+
+#Appends activity and subject names columns to the complete_data
 complete_data <- cbind(complete_data,complete_labels,complete_subjects)
 
 #Appropriately labels the data set with descriptive variable names
 names(complete_data) <- c(col_names,"activity","subject")
 
+#creates a tidy data set with the average of each variable for each activity and each subject
 avg_data <- complete_data %>% 
         group_by(activity, subject) %>% 
         summarize_all(funs(mean))
