@@ -25,9 +25,6 @@ features <- read.table("./UCI HAR Dataset/features.txt")
 
 #Extracts only the measurements on the mean and standard deviation for each measurement
 
-features %>% 
-        filter(grepl("mean",V2) | grepl("std",V2)  == TRUE)
-
 col_nums <- grep("mean|std", features[,2])
 col_names <- grep("mean|std", features[,2], value = TRUE)
 
